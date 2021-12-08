@@ -33,8 +33,8 @@ export default {
                     label: 'correct',
                     data: [2,1,1,1],
                     lineTension: 0,   
-                    backgroundColor: ['green','red','red','red'],
-                    borderColor: ['green','red','red','red'],
+                    backgroundColor: ['green','gray','gray','gray'],
+                    borderColor: ['green','gray','gray','gray'],
                     borderWidth:10,
                     fill: false
                 }]

@@ -22,6 +22,7 @@
             </b-col>
             <b-col cols="1"></b-col>
           </b-row>
+          
           <b-button
             :variant="block"
             @click="
@@ -30,7 +31,8 @@
                   this.block = 'danger';
                 } else {
                   this.block = 'success';
-                }
+                  this.asked_question=[]; 
+                }asked_question_reset();
               }
             "
             >開始
@@ -39,7 +41,12 @@
             </div>
             <div v-else style="display: inline">阻擋</div>
             提問</b-button
-          ><br /><br />
+          >
+          <br /><br />
+          <div v-if="this.block!='success'">
+          <b-list-group-item v-bind:key="i" v-for="i in asked_question"> {{i}}</b-list-group-item> 
+          </div>
+          <br />
           <b-button variant="danger" v-b-modal.modal-81>緊急彈跳授權</b-button>
           <b-modal id="modal-81" title="緊急彈跳授權" hide-footer>
             <h5>授權對象:</h5>
@@ -56,10 +63,10 @@
             </b-list-group>
           </b-modal>
           <hr />
-          <b-button v-b-modal.modal-2>彈跳問答題</b-button><br /><br />
-          <b-modal id="modal-2" title="彈跳問答題">
+          <b-button v-b-modal.modal-2 >彈跳問答題</b-button><br /><br />
+          <b-modal id="modal-2" title="彈跳問答題" @show="mov();">
             <center>
-              <b-button
+              <!--<b-button
                 @click="
                   cho();
                   mov();
@@ -69,10 +76,10 @@
               >
               <b-button @click="cho()" :variant="bad">B</b-button>
               <b-button @click="cho()" :variant="bad">C</b-button>
-              <b-button @click="cho()" :variant="bad">D</b-button>
+              <b-button @click="cho()" :variant="bad">D</b-button>-->
             </center>
             <br />
-            <div v-if="good == 'success'">
+            <div v-if="1">
               <b-row>
                 <b-col>
                   <table border="1">
@@ -89,7 +96,7 @@
                         </div>
                         <div
                           v-if="i + j <= stat && (i + j == 1 || i + j == 5)"
-                          style="background-color: red"
+                          style="background-color: lawngreen"
                         >
                           &nbsp;&nbsp;{{ i + j }}&nbsp;&nbsp;
                         </div>
@@ -143,7 +150,7 @@
                       </div>
                       <div
                         v-if="i + j > stat"
-                        style="background-color: hotpink"
+                        style="background-color: gray"
                       >
                         &nbsp;&nbsp;{{ i + j }}&nbsp;&nbsp;
                       </div>
@@ -347,7 +354,7 @@
           </b-modal>
           <!--<b-button v-b-modal.modal-3 @click="mov()">彈跳quiz</b-button
           ><br /><br />-->
-          <b-modal id="modal-3" title="彈跳quiz" hide-footer>
+          <b-modal id="modal-3-7" title="彈跳quiz" hide-footer>
             <b-row>
               <b-col>
                 <table border="1">
@@ -670,6 +677,7 @@ export default {
       block: "success",
       email: [],
       ema: "",
+      asked_question:[],
     };
   },
   created() {
@@ -682,7 +690,13 @@ export default {
     };
   },
   methods: {
-    cho() {
+    asked_question_reset(){
+      this.asked_question=[];
+      setTimeout(()=>{this.asked_question.push("物理一 王小明: 老師我想問第三大題第五題")},500);
+      setTimeout(()=>{this.asked_question.push("資管一 張大明: 老師今天晚餐吃什摸？")},1000);
+      setTimeout(()=>{this.asked_question.push("數學六 汪忠明: 請問番三角函數要考嗎?")},2000);
+      setTimeout(()=>{this.asked_question.push("中文二 Adam: I don't know how to solve p.47 Question 2")},3500);
+    },cho() {
       this.good = "success";
       this.bad = "danger";
     },
@@ -691,15 +705,16 @@ export default {
       console.log("down");
     },
     mov() {
+      this.stat=0;
       setTimeout(() => {
         this.stat += 1;
-      }, 3500);
+      }, 1500);
       setTimeout(() => {
         this.stat += 1;
-      }, 4000);
+      }, 2500);
       setTimeout(() => {
         this.stat += 1;
-      }, 4150);
+      }, 3050);
       setTimeout(() => {
         this.stat += 1;
       }, 4200);
@@ -840,8 +855,8 @@ export default {
                 <br>
                 <video id="video" autoplay muted playsinline></video>
                 <div id="output" style="display: inline"></div> 
-                <button type="button" class="btn btn-primary" style="position:absolute;right: 11px;top:100px;">彈跳問題</button>
-                <button type="button" class="btn btn-primary" sytle="position:absolute;right: 20px;top:60px;">儲存問題</button>
+                <button type="button" onclick="window.close();" class="btn btn-primary" style="position:absolute;right: 11px;top:100px;">彈跳問題</button>
+                <button type="button" onclick="window.close();" class="btn btn-primary" sytle="position:absolute;right: 20px;top:60px;">儲存問題</button>
                 <br><br>
                 <div class="form-group">
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -909,8 +924,8 @@ export default {
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <center>
-                <button type="button" onclick="tmp()" class="btn btn-primary">彈跳問題</button>
-                <button type="button" onclick="tmp()" class="btn btn-primary">儲存問題</button>
+                <button type="button" onclick="tmp();window.close();" class="btn btn-primary">彈跳問題</button>
+                <button type="button" onclick="tmp();window.close();" class="btn btn-primary">儲存問題</button>
                 </center>
                 <script>
                 function tmp(){
@@ -1008,7 +1023,7 @@ export default {
                 </div>
                 <br>
                 <center>
-                <button type="button" class="btn btn-danger">彈跳</button>
+                <button type="button" onclick="window.close();" class="btn btn-danger">彈跳</button>
                 </center>
                 </body>`
             .replace("</s>", "</scr" + "ipt>")
