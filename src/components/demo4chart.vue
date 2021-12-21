@@ -30,11 +30,11 @@ export default {
         },
         dataset:[
                 {
-                    label: 'correct',
+                    label: '最多人選擇',
                     data: [2,1,1,1],
                     lineTension: 0,   
-                    backgroundColor: ['green','gray','gray','gray'],
-                    borderColor: ['green','gray','gray','gray'],
+                    backgroundColor: ['black','gray','gray','gray'],
+                    borderColor: ['black','gray','gray','gray'],
                     borderWidth:10,
                     fill: false
                 }]

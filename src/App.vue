@@ -142,12 +142,12 @@ export default {
     }
   },
   created(){
-    if(this.isMobile()){
+    /*if(this.isMobile()){
       Swal.fire('Error','mobile device is not supported yet','error')
       alert('mobile device is not supported yet');
       
       window.location="/mobile.html";
-    }
+    }*/
   },
   mounted(){
     setInterval(this.checkonsite,100);
